@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Michaël Fortin"]
   spec.email         = ["fortinmike@irradiated.net"]
 
-  spec.summary       = %q{Recursively delete all "bin" and "obj" directories in the current folder}
+  spec.summary       = %q{Recursively delete temporary Visual Studio output files from the current directory}
   spec.homepage      = "https://github.com/fortinmike/binclean"
   spec.license       = "MIT"
 
