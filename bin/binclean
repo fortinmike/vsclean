@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "cleaner"
+require "clean"
 
-BinClean::Cleaner.run
+BinClean::Clean.run(ARGV)
