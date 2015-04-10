@@ -1,0 +1,5 @@
+---
+- !ruby/object:MultiRepo::ConfigEntry
+  id: 4f682071-8f10-457d-8332-16d1ce8d7ccc
+  path: ../binclean-dummy/
+  url: git@github.com:fortinmike/binclean-dummy.git
