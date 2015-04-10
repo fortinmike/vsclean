@@ -1,5 +1,8 @@
 # binclean
 
-Recursively delete temporary Visual Studio output files from the current directory.
+A recursive delete of temporary Visual Studio output files, binclean performs.
 
-That's all that tool does.
+### It Cleans:
+
+- "bin" directories
+- "obj" directories
