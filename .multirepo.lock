@@ -1,0 +1,6 @@
+---
+- !ruby/object:MultiRepo::LockEntry
+  name: binclean-dummy
+  id: 7c2eb791-fa86-4c01-a56a-fd5699b4b951
+  head: ea1b04c26e04dcb3c395c1cf86010ca456e7e3fd
+  branch: master
