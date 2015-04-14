@@ -6,3 +6,7 @@ A recursive delete of temporary Visual Studio output files, binclean performs.
 
 - "bin" directories
 - "obj" directories
+
+### To Install:
+
+        $ gem install binclean
