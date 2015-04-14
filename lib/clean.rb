@@ -1,6 +1,7 @@
 require "claide"
 require "info"
 require "console"
+require "fileutils"
 
 module BinClean
   class Clean < CLAide::Command
