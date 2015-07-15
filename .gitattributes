@@ -1,0 +1,2 @@
+.multirepo.lock merge=ours
+.multirepo.meta merge=ours
