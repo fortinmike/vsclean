@@ -14,16 +14,20 @@ module BinClean
     end
     
     def run
-      directories = Dir.glob("**/{bin,obj}").select { |f| File.directory?(f) }
+      # Delete bin and obj directories
+      paths = Dir.glob("**/{bin,obj}").select { |f| File.directory?(f) }
       
-      if directories.none?
+      # Delete .suo files (can cause Intellisense errors, among other things)
+      paths.push(*Dir.glob("**/.vs/**/.suo"))
+      
+      if paths.none?
         Console.log_step("All is well with the world... nothing to clean!")
         return
       end
         
       Console.log_step("Cleaning...") 
       
-      directories.each { |d| delete(d) }
+      paths.each { |d| delete(d) }
       
       Console.log_step("Done!")
     end
