@@ -1,6 +1,6 @@
 require "colored"
 
-module BinClean
+module VsClean
   class Console
     def self.log_step(message)
       print_arrow

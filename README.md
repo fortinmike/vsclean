@@ -1,12 +1,16 @@
-# binclean
+# vsclean
 
-A recursive delete of temporary Visual Studio output files, binclean performs.
+A recursive delete of temporary Visual Studio and ReSharper output files, vsclean performs.
 
-### It Cleans:
+## Installation:
 
-- "bin" directories
-- "obj" directories
+    $ gem install vsclean
 
-### To Install:
+## Usage:
 
-        $ gem install binclean
+### Local Cleanup
+
+    $ vsclean
+
+- Deletes `**/{bin,obj}`
+- Deletes `**/.vs/**/.suo`

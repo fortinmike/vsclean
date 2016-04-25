@@ -3,11 +3,11 @@ require "info"
 require "console"
 require "fileutils"
 
-module BinClean
+module VsClean
   class Clean < CLAide::Command
-    self.command = "binclean"
-    self.version = BinClean::VERSION
-    self.description = BinClean::DESCRIPTION
+    self.command = "vsclean"
+    self.version = VsClean::VERSION
+    self.description = VsClean::DESCRIPTION
     
     def initialize(argv)
       super

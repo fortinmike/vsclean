@@ -1,6 +1,6 @@
 ---
 - !ruby/object:MultiRepo::LockEntry
-  name: binclean-dummy
+  name: vsclean-dummy
   id: 7c2eb791-fa86-4c01-a56a-fd5699b4b951
   head: f0620f9f055abc0fb85e9cb4b26f76cac3643fc3
   branch: master

@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'info'
 
 Gem::Specification.new do |spec|
-  spec.name          = BinClean::NAME
-  spec.version       = BinClean::VERSION
+  spec.name          = VsClean::NAME
+  spec.version       = VsClean::VERSION
   spec.authors       = ["Michaël Fortin"]
   spec.email         = ["fortinmike@irradiated.net"]
 
-  spec.summary       = BinClean::DESCRIPTION
-  spec.homepage      = "https://github.com/fortinmike/binclean"
+  spec.summary       = VsClean::DESCRIPTION
+  spec.homepage      = "https://github.com/fortinmike/vsclean"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
