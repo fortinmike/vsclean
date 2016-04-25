@@ -1,5 +1,5 @@
 module VsClean
   NAME = "vsclean"
-  VERSION = "1.0.4"
+  VERSION = "1.0.5"
   DESCRIPTION = %q{A recursive delete of temporary Visual Studio and ReSharper output files, vsclean performs.}
 end
