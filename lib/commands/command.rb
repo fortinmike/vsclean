@@ -38,7 +38,7 @@ module VsClean
     def collect_global_paths
       home = File.expand_path("~")
       paths = Dir.glob(home + "/AppData/Local/JetBrains/**/SolutionCaches").select { |f| File.directory?(f) }
-      paths.push(home + "/AppData/Microsoft/WebsiteCache")
+      paths.push(*Dir.glob(home + "/AppData/Microsoft/WebsiteCache"))
       paths.push(*Dir.glob(home + "/AppData/Local/Microsoft/**/ComponentModelCache"))
     end
     
