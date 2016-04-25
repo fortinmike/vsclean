@@ -9,8 +9,15 @@ module VsClean
     self.version = VsClean::VERSION
     self.description = VsClean::DESCRIPTION
     
+    def self.options
+      [
+        ['[--global]', 'Delete global caches and temporary files'],
+        ['[--dry-run]', 'Simulate deletion (list all files and directories that would be deleted)']
+      ].concat(super)
+    end
+    
     def initialize(argv)
-      @dryrun = argv.flag?("dryrun")
+      @dryrun = argv.flag?("dry-run")
       @global = argv.flag?("global")
       super
     end
