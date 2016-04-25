@@ -2,6 +2,8 @@
 
 A recursive delete of temporary Visual Studio and ReSharper output files, vsclean performs.
 
+Useful when Visual Studio hangs or misbehaves. Give it a try! Contributions welcome.
+
 ## Installation:
 
     $ gem install vsclean
