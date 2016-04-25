@@ -4,7 +4,7 @@ require "console"
 require "fileutils"
 
 module VsClean
-  class Clean < CLAide::Command
+  class Command < CLAide::Command
     self.command = "vsclean"
     self.version = VsClean::VERSION
     self.description = VsClean::DESCRIPTION

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require "clean"
+require "commands/commands"
 
-VsClean::Clean.run(ARGV)
+VsClean::Command.run(ARGV)
