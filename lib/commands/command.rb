@@ -4,6 +4,12 @@ require "console"
 require "fileutils"
 
 module VsClean
+  class Mode
+    LOCAL = 0
+    GLOBAL = 1
+    FULL = 2
+  end
+
   class Command < CLAide::Command
     self.command = "vsclean"
     self.version = VsClean::VERSION
@@ -11,6 +17,7 @@ module VsClean
     
     def self.options
       [
+        ['[--full]', 'Delete local and global temporary files'],
         ['[--global]', 'Delete global caches and temporary files'],
         ['[--dry-run]', 'Simulate deletion (list all files and directories that would be deleted)']
       ].concat(super)
@@ -18,12 +25,20 @@ module VsClean
     
     def initialize(argv)
       @dryrun = argv.flag?("dry-run")
-      @global = argv.flag?("global")
+      
+      @mode = Mode::LOCAL
+      @mode = Mode::GLOBAL if argv.flag?("global")
+      @mode = Mode::FULL if argv.flag?("full")
+      
       super
     end
     
     def run
-      paths = @global ? collect_global_paths : collect_local_paths
+      paths = case @mode
+      when Mode::LOCAL; collect_global_paths
+      when Mode::GLOBAL; collect_global_paths
+      when Mode::FULL; collect_global_paths.push(*collect_local_paths)
+      end
       
       if paths.none?
         Console.log_step("All good... nothing to clean!")
