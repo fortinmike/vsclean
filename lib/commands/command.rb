@@ -17,8 +17,9 @@ module VsClean
     
     def self.options
       [
-        ['[--full]', 'Delete local and global temporary files'],
+        ['[--local]', '(DEFAULT) Delete caches and temporary files in the current directory'],
         ['[--global]', 'Delete global caches and temporary files'],
+        ['[--full]', 'Delete local *and* global temporary files'],
         ['[--dry-run]', 'Simulate deletion (list all files and directories that would be deleted)']
       ].concat(super)
     end
@@ -26,7 +27,7 @@ module VsClean
     def initialize(argv)
       @dryrun = argv.flag?("dry-run")
       
-      @mode = Mode::LOCAL
+      @mode = Mode::LOCAL if argv.flag?("local", true)
       @mode = Mode::GLOBAL if argv.flag?("global")
       @mode = Mode::FULL if argv.flag?("full")
       
@@ -35,7 +36,7 @@ module VsClean
     
     def run
       paths = case @mode
-      when Mode::LOCAL; collect_global_paths
+      when Mode::LOCAL; collect_local_paths
       when Mode::GLOBAL; collect_global_paths
       when Mode::FULL; collect_global_paths.push(*collect_local_paths)
       end
@@ -52,9 +53,9 @@ module VsClean
     
     def collect_global_paths
       home = File.expand_path("~")
-      paths = Dir.glob(home + "/AppData/Local/JetBrains/**/SolutionCaches").select { |f| File.directory?(f) }
-      paths.push(*Dir.glob(home + "/AppData/Microsoft/WebsiteCache"))
+      paths = Dir.glob(home + "/AppData/Microsoft/WebsiteCache")
       paths.push(*Dir.glob(home + "/AppData/Local/Microsoft/**/ComponentModelCache"))
+      paths.push(*Dir.glob(home + "/AppData/Local/JetBrains/**/SolutionCaches"))
     end
     
     def collect_local_paths
