@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in binclean.gemspec
+# Specify your gem's dependencies in vsclean.gemspec
 gemspec
