@@ -10,33 +10,48 @@ module VsClean
     self.description = VsClean::DESCRIPTION
     
     def initialize(argv)
+      @dryrun = argv.flag?("dryrun")
+      @global = argv.flag?("global")
       super
     end
     
     def run
-      # Delete bin and obj directories
-      paths = Dir.glob("**/{bin,obj}").select { |f| File.directory?(f) }
-      
-      # Delete .suo files (can cause Intellisense errors, among other things)
-      paths.push(*Dir.glob("**/.vs/**/.suo"))
+      paths = @global ? collect_global_paths : collect_local_paths
       
       if paths.none?
-        Console.log_step("All is well with the world... nothing to clean!")
+        Console.log_step("All good... nothing to clean!")
         return
       end
         
       Console.log_step("Cleaning...") 
-      
-      paths.each { |d| delete(d) }
-      
+      paths.each { |d| @dryrun ? simulate_delete(d) : delete(d) }
       Console.log_step("Done!")
+    end
+    
+    def collect_global_paths
+      home = File.expand_path("~")
+      paths = Dir.glob(home + "/AppData/Local/JetBrains/**/SolutionCaches").select { |f| File.directory?(f) }
+      paths.push(home + "/AppData/Microsoft/WebsiteCache")
+      paths.push(*Dir.glob(home + "/AppData/Local/Microsoft/**/ComponentModelCache"))
+    end
+    
+    def collect_local_paths
+      # bin and obj directories
+      paths = Dir.glob("**/{bin,obj}").select { |f| File.directory?(f) }
+      
+      # .suo files (can cause Intellisense errors, solution load issues and more)
+      paths.push(*Dir.glob("**/.vs/**/.suo"))
+    end
+    
+    def simulate_delete(path)
+      Console.log_substep("Would delete '#{path}'")
     end
     
     def delete(path)
       FileUtils.rm_r(path)
-      Console.log_substep("Deleted ./#{path}")
+      Console.log_substep("Deleted '#{path}'")
     rescue StandardError => e
-      Console.log_error("Could not delete './#{path}': #{e.message}")
+      Console.log_error("Could not delete '#{path}': #{e.message}")
     end
   end
 end
