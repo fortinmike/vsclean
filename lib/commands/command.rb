@@ -56,6 +56,7 @@ module VsClean
       paths = Dir.glob(home + "/AppData/Microsoft/WebsiteCache")
       paths.push(*Dir.glob(home + "/AppData/Local/Microsoft/**/ComponentModelCache"))
       paths.push(*Dir.glob(home + "/AppData/Local/JetBrains/**/SolutionCaches"))
+      paths.push(*Dir.glob(home + "/AppData/Local/Microsoft/**/ShadowCache")) # Blend designer cache (can cause issues after upgrade)
     end
     
     def collect_local_paths
@@ -71,7 +72,7 @@ module VsClean
     end
     
     def delete(path)
-      FileUtils.rm_r(path)
+      FileUtils.rm_rf(path)
       Console.log_substep("Deleted '#{path}'")
     rescue StandardError => e
       Console.log_error("Could not delete '#{path}': #{e.message}")
