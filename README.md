@@ -1,6 +1,6 @@
 # vsclean
 
-A recursive delete of temporary Visual Studio and ReSharper temporary files, vsclean performs.
+A recursive delete of Visual Studio and ReSharper temporary files, vsclean performs.
 
 Useful when Visual Studio hangs or misbehaves. Give it a try! Contributions welcome.
 
